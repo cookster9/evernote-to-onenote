@@ -4,7 +4,6 @@ from evernote.edam.type.ttypes import NoteSortOrder
 from evernote.edam.notestore.ttypes import NoteFilter, NotesMetadataResultSpec
 from evernote.api.client import EvernoteClient
 
-
 def main():
     #find the token by going to evernote web and finding it in the cookies. "auth" cookie
     evernote_token = PASS.evernote_token
