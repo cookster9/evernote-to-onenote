@@ -1,4 +1,5 @@
 #evernote_to_python.py
+# https://sparkbyexamples.com/pyspark-tutorial/
 #get evernote notebooks
 #for each notebook...
 #get all notes
@@ -7,6 +8,7 @@
     #create dataset from dataframe
     #or you can parallelize a list to make a dataset
 #run transform to a valid POST request
+    #create a lambda function that takes the input (note text) and turns it into a valid post request that will make a note in onenote
 #Make sections for each notebook
 #Insert notes in correct reverse chronological order
 
@@ -21,4 +23,7 @@ for i in range(10):
 print(l)
 data_set = sc.parallelize(l)
 
-print(data_set)
+print(data_set.count())
+data_set2 = data_set.map(lambda x: x*2)
+for element in (data_set2.collect()):
+    print(element)
