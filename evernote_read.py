@@ -14,28 +14,28 @@ def main():
 
     for n in notebooks:
         print(n.name)
+        filter = NoteFilter(notebookGuid=n.guid)
+        resultSpec = NotesMetadataResultSpec()
+        resultSpec.includeTitle = True
+        resultSpec.includeContentLength = True
+        resultSpec.includeCreated = True
+        resultSpec.includeContent = True
+        resultSpec.includeUpdated = True
+        resultSpec.includeNotebookGuid = True
+        resultSpec.includeAttributes = True
+        resultSpec.includeTagGuids = True
+        resultSpec.includeLargestResourceMime = True
+        resultSpec.includeLargestResourceSize = True
 
-    filter = NoteFilter()
-    resultSpec = NotesMetadataResultSpec()
-    resultSpec.includeTitle = True
-    resultSpec.includeContentLength = True
-    resultSpec.includeCreated = True
-    resultSpec.includeContent = True
-    resultSpec.includeUpdated = True
-    resultSpec.includeNotebookGuid = True
-    resultSpec.includeAttributes = True
-    resultSpec.includeTagGuids = True
-    resultSpec.includeLargestResourceMime = True
-    resultSpec.includeLargestResourceSize = True
-
-    notes = noteStore.findNotesMetadata(evernote_token, filter, 0, 100, resultSpec)     
-    i = 0
-    for note in notes.notes:
-        if i < 10:
-            print(note.guid)
-            content = noteStore.getNoteContent(evernote_token, note.guid)
-            print(content)
-            i = i + 1
+        notes = noteStore.findNotesMetadata(evernote_token, filter, 0, 100, resultSpec)     
+        i = 0
+        for note in notes.notes:
+            if i < 10:
+                print(note.guid)
+                print(note.notebookGuid)
+                content = noteStore.getNoteContent(evernote_token, note.guid)
+                print(content)
+                i = i + 1
 
 main()
 exit()

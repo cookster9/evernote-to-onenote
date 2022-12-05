@@ -1,29 +1,49 @@
-#evernote_to_python.py
-# https://sparkbyexamples.com/pyspark-tutorial/
-#get evernote notebooks
-#for each notebook...
-#get all notes
-#load notes to spark RDD Dataset thing. (notebook, note)
-    #load notes to Dataframe first, or write to file
-    #create dataset from dataframe
-    #or you can parallelize a list to make a dataset
-#run transform to a valid POST request
-    #create a lambda function that takes the input (note text) and turns it into a valid post request that will make a note in onenote
-#Make sections for each notebook
-#Insert notes in correct reverse chronological order
+import datetime
+#Read evernote note
+import PASS
+from evernote.edam.type.ttypes import NoteSortOrder
+from evernote.edam.notestore.ttypes import NoteFilter, NotesMetadataResultSpec
+from evernote.api.client import EvernoteClient
 
-from pyspark import SparkContext
+def main():
+    #find the token by going to evernote web and finding it in the cookies. "auth" cookie
+    evernote_token = PASS.evernote_token
+    client = EvernoteClient(token=evernote_token, sandbox=False)
+    userStore = client.get_user_store()
+    noteStore = client.get_note_store()
+    notebooks = noteStore.listNotebooks()
 
-sc = SparkContext()
+    # sortOrder = NoteSortOrder("UPDATED")
 
-l = []
-for i in range(10):
-    l.append(i)
+    for n in notebooks:
+        print(n.name)
+        filter = NoteFilter(order=2, ascending=False, notebookGuid=n.guid) #reverse chronological
+        resultSpec = NotesMetadataResultSpec()
+        resultSpec.includeTitle = True
+        resultSpec.includeContentLength = True
+        resultSpec.includeCreated = True
+        resultSpec.includeContent = True
+        resultSpec.includeUpdated = True
+        resultSpec.includeNotebookGuid = True
+        resultSpec.includeAttributes = True
+        resultSpec.includeTagGuids = True
+        resultSpec.includeLargestResourceMime = True
+        resultSpec.includeLargestResourceSize = True        
 
-print(l)
-data_set = sc.parallelize(l)
-
-print(data_set.count())
-data_set2 = data_set.map(lambda x: x*2)
-for element in (data_set2.collect()):
-    print(element)
+        notes = noteStore.findNotesMetadata(evernote_token, filter, 0, 1, resultSpec)
+        #Evernote stores its date/time values in epoch time - the number of seconds since 1/1/1970.
+        for note in notes.notes:
+            print(note.guid)
+            #print(note.updated)
+            title = note.title
+            date = note.updated
+            formatted_date = float(note.updated)/1000
+            print(datetime.datetime.fromtimestamp(formatted_date))#has to be in seconds not milliseconds
+            content = noteStore.getNoteContent(evernote_token, note.guid)
+            print(title)
+            print(formatted_date)
+            print(content)    
+        print()        
+    
+main()
+exit()
