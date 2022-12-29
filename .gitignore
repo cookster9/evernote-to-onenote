@@ -1,5 +1,13 @@
+#specific files
+evernote_read.py
+import_msal.py
+notes.txt
+onenote_read.py
+spark_testing.py
+test_post.py
+
 #project specific
-*PASS*
+PASS.py
 IGNORE*
 
 .idea

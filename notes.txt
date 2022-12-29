@@ -1,9 +1,0 @@
-notes here
-
-DONE:
-    Authorization
-    Looping through structure
-
-TODO:
-    Create sections based on onenote notebook names
-    Generate Post request to create an actual note
