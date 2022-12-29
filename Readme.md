@@ -6,9 +6,10 @@ Steps:
 3. Open evernote.com and log in 
 4. Go to cookies in your browser (dev tools). Find the "auth" cookie. Copy the values and set it as your evernote_token in PASS.py
 5. Set up your Azure account correctly and make an app to work with apis
+    
     Okay this took me a while to figure out. Make an Azure account. Make an app. Make sure it's personal. You might have to mess with the manifest. check some of the urls in access_token_url.py. If you really want to use this make an issue in github and I'll try to help
 6. Set personal_client_id to your azure app client id and redirect_uri as appropriate (see default in access_token_url.py)
 7. Run access_token_url.py
-8. Take the output in put it in your web browser
-9. Copy the new url (you might have to accept permissions here) and set full_token variable in pass.py to that url
-10. Run evernote_to_onenote.py
+8. Take the output in put it in your web browser. Go to that url. You might have to accept permissions here
+9. Copy the new url that shows up (the access token you need is buried in there) and set full_token variable in pass.py to that url
+10. Run evernote_to_onenote.py. you might get limited by api calls. I made an array in the script to be able to specify notebooks that are already done exporting. Use that so you don't have to start completely over
