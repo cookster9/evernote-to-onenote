@@ -1,5 +1,7 @@
 OKAY so I made this to switch to Onenote as my primary note app instead of evernote. I wanted to to archive my old evernote notes that I barely look at anyway but didn't want to lose. I wasn't too worried about keeping formatting or images. I was able to pull the evernote content as-is and throw it into onenote and that was good enough for me. If you want something super robust this might not work. All i wanted to do was keep a decent running archive of my old notes before switching to using Onenote full time.
 
+I made it so that each of my Evernote notebooks became a SECTION in Onenote. Which made sense to me. Then notes are added in reverse chronological order so that the last modified notes appear at the top.
+
 Steps:
 1. Download the repo
 2. Rename PASS_TEMPLATE.py to PASS.py for your credentials
