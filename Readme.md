@@ -4,9 +4,9 @@ I made it so that each of my Evernote notebooks became a SECTION in Onenote. Whi
 
 Steps:
 1. Download the repo
-2. Rename PASS_TEMPLATE.py to PASS.py for your credentials
+2. Rename PASS_TEMPLATE.py to PASS.py. This file will be used for your credentials
 3. Open evernote.com and log in 
-4. Go to cookies in your browser (dev tools). Find the "auth" cookie. Copy the values and set it as your evernote_token in PASS.py
+4. Go to cookies in your browser (dev tools). Find the "auth" cookie. Copy the value and set it as your evernote_token in PASS.py
 5. Set up your Azure account correctly and make an app to work with apis
     
     Okay this took me a while to figure out. Make an Azure account. Make an app. Make sure it's personal. You might have to mess with the manifest. check some of the urls in access_token_url.py. If you really want to use this make an issue in github and I'll try to help
